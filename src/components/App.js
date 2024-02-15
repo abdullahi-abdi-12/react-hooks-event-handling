@@ -1,28 +1,21 @@
-import React from "react";
-import Tickler from "./Tickler";
-import MultiButton from "./MultiButton";
-import ChangeItUp from "./ChangeItUp";
-import Login from "./Login";
-
+import { useState } from "react";
+import todoList from "../data/data";
+import Todo from "./Todo";
+import TodoForm from "./TodoForm";
 function App() {
-  return (
-    <div>
-      <h3>onClick</h3>
-      <Tickler />
-      <hr />
+    const [todos, setTodos] = useState(todoList);
 
-      <MultiButton />
-      <hr />
-
-      <h3>onChange</h3>
-      <ChangeItUp />
-      <hr />
-
-      <h3>onSubmit</h3>
-      <Login />
-      <hr />
-    </div>
-  );
+    // add a new task
+    function handleTodoFormSubmit(newTodo) {
+        setTodos([...todos, newTodo])
+    }
+    console.log(todos);
+    return (
+        <>
+        <TodoForm onTodoFormSubmit={handleTodoFormSubmit} />
+        <Todo todos={todos} />
+        </>
+    );
 }
 
 export default App;
